@@ -1,13 +1,25 @@
 from pathlib import Path
 
+# Reading data
 path = Path.home() / 'hello.txt'
 path.touch()
-file = path.open(mode='r', encoding='utf-8')
+with path.open(mode='r', encoding='utf-8') as file:
+    for line in file.readlines():
+        print(line, end="")
 
-file.close()
+# Writing Data (overwritten)
+with path.open(mode='w', encoding='utf-8') as file:
+    file.write('Hi there!')
 
-file_path = 'C/Users/kronk/hello.txt'
+# Writing Data (multiple lines)
+lines_of_text = [
+    "Hello from Line 1\n",
+    "Hello from Line 2\n",
+    "Hello from Line 3\n",
+]
+with path.open(mode='w', encoding='utf-8') as file:
+    file.writelines(lines_of_text)
 
-file = open(file_path, mode='r', encoding='utf-8')
-
-file.close()
+# Writing Data (append)
+with path.open(mode='a', encoding='utf-8') as file:
+    file.write('\nHello')
